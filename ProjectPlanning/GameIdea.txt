@@ -1,0 +1,21 @@
+Project Prometheus:
+
+The game idea is a simple 2D top-down puzzle game with the appearance of a roguelike adventure.
+
+The main Goal of each level is to reach the exit before the player gets killed.
+
+The Main opponent in each level is a deadly fog that kills instantly. The Player needs to evade this fog and reach the exit before the exit gets blocked.
+
+Since this game is intended to be a thoughtful game, all movable object will move only when the player moves. This includes the fog that grows with each movement.
+
+The Main target is, therefore, reaching the exit in time and evading any time wasting activities.
+
+The Main way to achieve that this target can't be achieved easily is to throw obstacles in the way of the player.
+
+The goal of these obstacles is to force the player to not simply try to outrun the fog for the exit and instead think of a different solution.
+
+The intended obstacles for the game are walls, interactive objects, traps, and enemies.
+
+Just like the fog, traps and enemies kill instantly both the player and themselves.
+
+The Game layout will be that of a grid, object placement and player movement will be adjusted to the grid.
