@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4950409425030654}
   - component: {fileID: 212682096034872416}
-  - component: {fileID: 114857533683476510}
   - component: {fileID: 50289631043309838}
   - component: {fileID: 61662283710350854}
+  - component: {fileID: 114494449903376240}
+  - component: {fileID: 95592319333835020}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -88,7 +89,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.96, y: 0.96}
   m_EdgeRadius: 0
---- !u!114 &114857533683476510
+--- !u!95 &95592319333835020
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1649061477362528}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114494449903376240
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,10 +115,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1649061477362528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9013472b86d5a44a59d4cfccd88b23, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f9fe36e9552e344bb19c783d56170bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  moveTime: 1
+  blockingLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  restartLevelDelay: 1
 --- !u!212 &212682096034872416
 SpriteRenderer:
   m_ObjectHideFlags: 1
