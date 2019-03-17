@@ -29,7 +29,7 @@ using System.Collections;
         
         //Move returns true if it is able to move and false if not. 
         //Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.
-        protected bool Move (int xDir, int yDir, out RaycastHit2D hit)
+        protected bool Move (float xDir, float yDir, out RaycastHit2D hit)
         {
             //Store start position to move from, based on objects current transform position.
             Vector2 start = transform.position;
@@ -88,7 +88,7 @@ using System.Collections;
         
         //The virtual keyword means AttemptMove can be overridden by inheriting classes using the override keyword.
         //AttemptMove takes a generic parameter T to specify the type of component we expect our unit to interact with if blocked (Player for Enemies, Wall for Player).
-        protected virtual void AttemptMove (int xDir, int yDir)
+        protected virtual void AttemptMove (float xDir, float yDir)
         {
             //Hit will store whatever our linecast hits when Move is called.
             RaycastHit2D hit;

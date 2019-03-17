@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;      //Allows us to use SceneManager
     public class Player : MovingObject
     {
         public float restartLevelDelay = 1f;        //Delay time in seconds to restart level. 
-        private Animator animator;                  //Used to store a reference to the Player's animator component.
-        private int food;                           //Used to store player food points total during level.
-        
+        private Animator animator;                  //Used to store a reference to the Player's animator component.     
+
+        private bool gotHit;   
         
         //Start overrides the Start function of MovingObject
         protected override void Start ()
@@ -16,20 +16,19 @@ using UnityEngine.SceneManagement;      //Allows us to use SceneManager
             //Get a component reference to the Player's animator component
             animator = GetComponent<Animator>();
             
-            //Get the current food point total stored in GameManager.instance between levels.
-            food = 1;
-            
             //Call the Start function of the MovingObject base class.
             base.Start ();
         }
         
         private void Update ()
         {
+            GameManager.instance.playersTurn = true;
+
             //If it's not the player's turn, exit the function.
             if(!GameManager.instance.playersTurn) return;
             
-            int horizontal = 0;     //Used to store the horizontal move direction.
-            int vertical = 0;       //Used to store the vertical move direction.
+            float horizontal = 0;     //Used to store the horizontal move direction.
+            float vertical = 0;       //Used to store the vertical move direction.
             
             
             //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
@@ -41,7 +40,23 @@ using UnityEngine.SceneManagement;      //Allows us to use SceneManager
             //Check if moving horizontally, if so set vertical to zero.
             if(horizontal != 0)
             {
+                if (horizontal > 0) {
+                    horizontal = 0.3f;
+                }
+                else {
+                    horizontal = -0.3f;
+                }
+                
                 vertical = 0;
+            }
+            else if (vertical != 0) {
+                if (vertical > 0) {
+                    vertical = 0.3f;
+                }
+                else {
+                    vertical = -0.3f;
+                } 
+                horizontal = 0;
             }
             
             //Check if we have a non-zero value for horizontal or vertical
@@ -50,11 +65,13 @@ using UnityEngine.SceneManagement;      //Allows us to use SceneManager
                 //Pass in horizontal and vertical as parameters to specify the direction to move Player in.
                 AttemptMove(horizontal, vertical);
             }
+
+            
         }
         
         //AttemptMove overrides the AttemptMove function in the base class MovingObject
         //AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
-        protected override void AttemptMove (int xDir, int yDir)
+        protected override void AttemptMove (float xDir, float yDir)
         {          
             //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
             base.AttemptMove (xDir, yDir);
@@ -68,6 +85,9 @@ using UnityEngine.SceneManagement;      //Allows us to use SceneManager
                 //Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
             }
             
+            //End players turn after movement 
+            GameManager.instance.playersTurn = false;
+
             //Since the player has moved and lost food points, check if the game has ended.
             CheckIfGameOver ();
         }
@@ -99,8 +119,8 @@ using UnityEngine.SceneManagement;      //Allows us to use SceneManager
         //CheckIfGameOver checks if the player is out of food points and if so, ends the game.
         private void CheckIfGameOver ()
         {
-            //Check if food point total is less than or equal to zero.
-            if (food <= 0) 
+            gotHit = false;
+            if (gotHit) 
             {
                 
                 //Call the GameOver function of GameManager.
