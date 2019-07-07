@@ -27,6 +27,11 @@ using UnityEngine.UI;                   //Allows us to use UI.
             DontDestroyOnLoad(gameObject);   
         }
         
+        //Will be triggerd after player movement
+        public void UpdateField() {
+            System.Threading.Thread.Sleep(250);
+            GameManager.instance.playersTurn = true;
+        }
         
         //GameOver (not used yet)
         public void GameOver()

@@ -22,7 +22,7 @@ public class Player : MovingObject
 
     private void Update()
     {
-        GameManager.instance.playersTurn = true;
+        
 
         //If it's not the player's turn, exit the function.
         if (!GameManager.instance.playersTurn) return;
@@ -69,7 +69,9 @@ public class Player : MovingObject
         {
             //Pass in horizontal and vertical as parameters to specify the direction to move Player in.
             AttemptMove(horizontal, vertical);
-            System.Threading.Thread.Sleep(250);
+            //End players turn after movement 
+            GameManager.instance.playersTurn = false;
+            GameManager.instance.UpdateField();
         }
 
 
@@ -90,9 +92,6 @@ public class Player : MovingObject
         {
             //Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
         }
-
-        //End players turn after movement 
-        GameManager.instance.playersTurn = false;
 
         //Since the player has moved and lost food points, check if the game has ended.
         CheckIfGameOver();
