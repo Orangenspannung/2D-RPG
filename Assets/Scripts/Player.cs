@@ -6,16 +6,11 @@ using UnityEngine.SceneManagement;      //Allows us to use SceneManager
 public class Player : MovingObject
 {
     public float restartLevelDelay = 1f;        //Delay time in seconds to restart level. 
-    private Animator animator;                  //Used to store a reference to the Player's animator component.     
-
     private bool gotHit;
 
     //Start overrides the Start function of MovingObject
     protected override void Start()
     {
-        //Get a component reference to the Player's animator component
-        animator = GetComponent<Animator>();
-
         //Call the Start function of the MovingObject base class.
         base.Start();
     }
@@ -32,36 +27,16 @@ public class Player : MovingObject
 
 
         //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
-        horizontal = (int)(Input.GetAxisRaw("Horizontal"));
-
-        //Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
-        vertical = (int)(Input.GetAxisRaw("Vertical"));
-
-        //Check if moving horizontally, if so set vertical to zero.
-        if (horizontal != 0)
-        {
-            if (horizontal > 0)
-            {
-                horizontal = 0.3f;
-            }
-            else
-            {
-                horizontal = -0.3f;
-            }
-
-            vertical = 0;
-        }
-        else if (vertical != 0)
-        {
-            if (vertical > 0)
-            {
-                vertical = 0.3f;
-            }
-            else
-            {
-                vertical = -0.3f;
-            }
-            horizontal = 0;
+        if(Input.GetKeyDown(KeyCode.UpArrow)) {
+            vertical = 1;
+        } else if(Input.GetKeyDown(KeyCode.DownArrow)) {
+            vertical = -1;
+        } else if(Input.GetKeyDown(KeyCode.RightArrow)) {
+            horizontal = 1;
+            
+        } else if(Input.GetKeyDown(KeyCode.LeftArrow)) {
+            horizontal = -1;
+            
         }
 
         //Check if we have a non-zero value for horizontal or vertical
